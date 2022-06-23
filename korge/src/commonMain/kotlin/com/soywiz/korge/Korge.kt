@@ -76,7 +76,7 @@ import kotlin.reflect.KClass
  * You have to call the [Korge] method by either providing some parameters, or a [Korge.Config] object.
  */
 object Korge {
-	val logger = Logger("Korge")
+    val logger = Logger("Korge")
     val DEFAULT_GAME_ID = "com.soywiz.korge.unknown"
 
     suspend operator fun invoke(config: Config) {
@@ -85,23 +85,35 @@ object Korge {
         val windowSize = module.windowSize
 
         Korge(
-            title = config.title ?: module.title,
-            width = config.windowSize?.width ?: windowSize.width,
-            height = config.windowSize?.height ?: windowSize.height,
-            virtualWidth = config.virtualSize?.width ?: module.size.width,
-            virtualHeight = config.virtualSize?.height ?: module.size.height,
-            bgcolor = config.bgcolor ?: module.bgcolor,
-            quality = config.quality ?: module.quality,
+            title = config.title
+                ?: module.title,
+            width = config.windowSize?.width
+                ?: windowSize.width,
+            height = config.windowSize?.height
+                ?: windowSize.height,
+            virtualWidth = config.virtualSize?.width
+                ?: module.size.width,
+            virtualHeight = config.virtualSize?.height
+                ?: module.size.height,
+            bgcolor = config.bgcolor
+                ?: module.bgcolor,
+            quality = config.quality
+                ?: module.quality,
             icon = null,
-            iconPath = config.icon ?: module.icon,
+            iconPath = config.icon
+                ?: module.icon,
             //iconDrawable = module.iconImage,
             imageFormats = ImageFormats(config.imageFormats + module.imageFormats),
             targetFps = module.targetFps,
-            scaleAnchor = config.scaleAnchor ?: module.scaleAnchor,
-            scaleMode = config.scaleMode ?: module.scaleMode,
-            clipBorders = config.clipBorders ?: module.clipBorders,
+            scaleAnchor = config.scaleAnchor
+                ?: module.scaleAnchor,
+            scaleMode = config.scaleMode
+                ?: module.scaleMode,
+            clipBorders = config.clipBorders
+                ?: module.clipBorders,
             debug = config.debug,
-            fullscreen = config.fullscreen ?: module.fullscreen,
+            fullscreen = config.fullscreen
+                ?: module.fullscreen,
             args = config.args,
             gameWindow = config.gameWindow,
             injector = config.injector,
@@ -129,7 +141,11 @@ object Korge {
                     config.sceneClass != null -> {
                         val sc = SceneContainer(views, name = "rootSceneContainer")
                         views.stage += sc
-                        val scene = sc.changeTo(config.sceneClass, *config.sceneInjects.toTypedArray(), time = 0.milliseconds)
+                        val scene = sc.changeTo(
+                            config.sceneClass,
+                            *config.sceneInjects.toTypedArray(),
+                            time = 0.milliseconds
+                        )
                         config.constructedScene(scene, views)
                         // Se we have the opportunity to execute deinitialization code at the scene level
                         views.onClose { sc.changeTo<EmptyScene>() }
@@ -139,6 +155,20 @@ object Korge {
         )
     }
 
+    suspend operator fun invoke(
+        config: Config,
+        entry: suspend Stage.() -> Unit
+    ) {
+        invoke(
+            title = config.title,
+            width = config.
+        )
+    }
+
+    @Deprecated(
+        "Use invoke() with config param instead.",
+        replaceWith = ReplaceWith("invoke(config: Config, entry: suspend Stage.() -> Unit)")
+    )
     suspend operator fun invoke(
         title: String = "Korge",
         width: Int = DefaultViewport.WIDTH, height: Int = DefaultViewport.HEIGHT,
@@ -168,12 +198,15 @@ object Korge {
         batchMaxQuads: Int = BatchBuilder2D.DEFAULT_BATCH_QUADS,
         multithreaded: Boolean? = null,
         entry: suspend Stage.() -> Unit
-	) {
+    ) {
         if (!OS.isJsBrowser) {
             configureLoggerFromProperties(localCurrentDirVfs["klogger.properties"])
         }
-        val realGameWindow = (gameWindow ?: coroutineContext[GameWindow] ?: CreateDefaultGameWindow(GameWindowCreationConfig(multithreaded = multithreaded)))
-        realGameWindow.bgcolor = bgcolor ?: Colors.BLACK
+        val realGameWindow = (gameWindow
+            ?: coroutineContext[GameWindow]
+            ?: CreateDefaultGameWindow(GameWindowCreationConfig(multithreaded = multithreaded)))
+        realGameWindow.bgcolor = bgcolor
+            ?: Colors.BLACK
         //println("Configure: ${width}x${height}")
         // @TODO: Configure should happen before loop. But we should ensure that all the korgw targets are ready for this
         //realGameWindow.configure(width, height, title, icon, fullscreen)
@@ -181,14 +214,23 @@ object Korge {
             val gameWindow = this
             if (OS.isNative) println("Korui[0]")
             gameWindow.registerTime("configureGameWindow") {
-                realGameWindow.configure(width, height, title, icon, fullscreen, bgcolor ?: Colors.BLACK)
+                realGameWindow.configure(
+                    width,
+                    height,
+                    title,
+                    icon,
+                    fullscreen,
+                    bgcolor
+                        ?: Colors.BLACK
+                )
             }
             gameWindow.registerTime("setIcon") {
                 try {
                     // Do nothing
                     when {
                         //iconDrawable != null -> this.icon = iconDrawable.render()
-                        iconPath != null -> this.icon = resourcesVfs[iconPath!!].readBitmapOptimized(imageFormats)
+                        iconPath != null -> this.icon =
+                            resourcesVfs[iconPath!!].readBitmapOptimized(imageFormats)
                         else -> Unit
                     }
                 } catch (e: Throwable) {
@@ -204,7 +246,9 @@ object Korge {
             // Use this once Korgw is on 1.12.5
             //val views = Views(gameWindow.getCoroutineDispatcherWithCurrentContext() + SupervisorJob(), ag, injector, input, timeProvider, stats, gameWindow)
             val views: Views = Views(
-                coroutineContext = coroutineContext + gameWindow.coroutineDispatcher + AsyncInjectorContext(injector) + SupervisorJob(),
+                coroutineContext = coroutineContext + gameWindow.coroutineDispatcher + AsyncInjectorContext(
+                    injector
+                ) + SupervisorJob(),
                 ag = if (debugAg) PrintAG() else ag,
                 injector = injector,
                 input = input,
@@ -240,7 +284,14 @@ object Korge {
             //Korge.prepareViews(views, gameWindow, bgcolor != null, bgcolor ?: Colors.TRANSPARENT_BLACK)
 
             gameWindow.registerTime("prepareViews") {
-                prepareViews(views, gameWindow, bgcolor != null, bgcolor ?: Colors.TRANSPARENT_BLACK, waitForFirstRender = true)
+                prepareViews(
+                    views,
+                    gameWindow,
+                    bgcolor != null,
+                    bgcolor
+                        ?: Colors.TRANSPARENT_BLACK,
+                    waitForFirstRender = true
+                )
             }
 
             gameWindow.registerTime("nativeSoundProvider") {
@@ -309,13 +360,17 @@ object Korge {
         val mouseTouchId = -1
 
         val tempXY: Point = Point()
+
         // devicePixelRatio might change at runtime by changing the resolution or changing the screen of the window
         fun getRealXY(x: Double, y: Double, scaleCoords: Boolean, out: Point = tempXY): Point {
             return views.windowToGlobalCoords(x, y, out)
         }
 
-        fun getRealX(x: Double, scaleCoords: Boolean): Double = if (scaleCoords) x * ag.devicePixelRatio else x
-        fun getRealY(y: Double, scaleCoords: Boolean): Double = if (scaleCoords) y * ag.devicePixelRatio else y
+        fun getRealX(x: Double, scaleCoords: Boolean): Double =
+            if (scaleCoords) x * ag.devicePixelRatio else x
+
+        fun getRealY(y: Double, scaleCoords: Boolean): Double =
+            if (scaleCoords) y * ag.devicePixelRatio else y
 
         /*
         fun updateTouch(id: Int, x: Double, y: Double, start: Boolean, end: Boolean) {
@@ -373,7 +428,13 @@ object Korge {
 
         val mouseTouchEvent = TouchEvent()
 
-        fun dispatchSimulatedTouchEvent(x: Double, y: Double, button: MouseButton, type: TouchEvent.Type, status: Touch.Status) {
+        fun dispatchSimulatedTouchEvent(
+            x: Double,
+            y: Double,
+            button: MouseButton,
+            type: TouchEvent.Type,
+            status: Touch.Status
+        ) {
             mouseTouchEvent.screen = 0
             mouseTouchEvent.emulated = true
             mouseTouchEvent.currentTime = DateTime.now()
@@ -392,17 +453,35 @@ object Korge {
                 MouseEvent.Type.DOWN -> {
                     mouseDown("mouseDown", x, y, e.button)
                     //updateTouch(mouseTouchId, x, y, start = true, end = false)
-                    dispatchSimulatedTouchEvent(x, y, e.button, TouchEvent.Type.START, Touch.Status.ADD)
+                    dispatchSimulatedTouchEvent(
+                        x,
+                        y,
+                        e.button,
+                        TouchEvent.Type.START,
+                        Touch.Status.ADD
+                    )
                 }
                 MouseEvent.Type.UP -> {
                     mouseUp("mouseUp", x, y, e.button)
                     //updateTouch(mouseTouchId, x, y, start = false, end = true)
-                    dispatchSimulatedTouchEvent(x, y, e.button, TouchEvent.Type.END, Touch.Status.REMOVE)
+                    dispatchSimulatedTouchEvent(
+                        x,
+                        y,
+                        e.button,
+                        TouchEvent.Type.END,
+                        Touch.Status.REMOVE
+                    )
                 }
                 MouseEvent.Type.DRAG -> {
                     mouseDrag("onMouseDrag", x, y)
                     //updateTouch(mouseTouchId, x, y, start = false, end = false)
-                    dispatchSimulatedTouchEvent(x, y, e.button, TouchEvent.Type.MOVE, Touch.Status.KEEP)
+                    dispatchSimulatedTouchEvent(
+                        x,
+                        y,
+                        e.button,
+                        TouchEvent.Type.MOVE,
+                        Touch.Status.KEEP
+                    )
                 }
                 MouseEvent.Type.MOVE -> mouseMove("mouseMove", x, y, inside = true)
                 MouseEvent.Type.CLICK -> Unit
@@ -544,25 +623,26 @@ object Korge {
 
     @KorgeInternal
     suspend fun prepareViews(
-            views: Views,
-            eventDispatcher: EventDispatcher,
-            clearEachFrame: Boolean = true,
-            bgcolor: RGBA = Colors.TRANSPARENT_BLACK,
-            fixedSizeStep: TimeSpan = TimeSpan.NIL,
-            waitForFirstRender: Boolean = true
+        views: Views,
+        eventDispatcher: EventDispatcher,
+        clearEachFrame: Boolean = true,
+        bgcolor: RGBA = Colors.TRANSPARENT_BLACK,
+        fixedSizeStep: TimeSpan = TimeSpan.NIL,
+        waitForFirstRender: Boolean = true
     ) {
-        val firstRenderDeferred = prepareViewsBase(views, eventDispatcher, clearEachFrame, bgcolor, fixedSizeStep)
+        val firstRenderDeferred =
+            prepareViewsBase(views, eventDispatcher, clearEachFrame, bgcolor, fixedSizeStep)
         if (waitForFirstRender) {
             firstRenderDeferred.await()
         }
     }
 
-	data class Config(
+    data class Config(
         val module: Module = Module(),
         val args: Array<String> = arrayOf(),
         val imageFormats: ImageFormat = RegisteredImageFormats,
         val gameWindow: GameWindow? = null,
-		//val eventDispatcher: EventDispatcher = gameWindow ?: DummyEventDispatcher, // Removed
+        //val eventDispatcher: EventDispatcher = gameWindow ?: DummyEventDispatcher, // Removed
         val sceneClass: KClass<out Scene>? = module.mainScene,
         val sceneInjects: List<Any> = listOf(),
         val timeProvider: TimeProvider = TimeProvider,
@@ -588,11 +668,20 @@ object Korge {
         val main: (suspend Stage.() -> Unit)? = module.main,
         val constructedScene: Scene.(Views) -> Unit = module.constructedScene,
         val constructedViews: (Views) -> Unit = module.constructedViews,
-	) {
-        val finalWindowSize: ISizeInt get() = windowSize ?: module.windowSize
-        val finalVirtualSize: ISizeInt get() = virtualSize ?: module.size
+    ) {
+        val finalWindowSize: ISizeInt
+            get() = windowSize
+                ?: module.windowSize
+        val finalVirtualSize: ISizeInt
+            get() = virtualSize
+                ?: module.size
     }
 
-	data class ModuleArgs(val args: Array<String>)
+    data class ModuleArgs(val args: Array<String>)
+
+    val DEFAULT_CONFIG = Config(
+        title = "Korge",
+        windowSize = ISizeInt(DefaultViewport.WIDTH, DefaultViewport.HEIGHT)
+    )
 }
 

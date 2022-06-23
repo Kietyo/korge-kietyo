@@ -25,13 +25,7 @@ import com.soywiz.korma.geom.degrees
 import kotlinx.coroutines.CoroutineScope
 import org.junit.Test
 
-fun korgeTest(callback: suspend CoroutineScope.() -> Unit) {
-    suspendTest { callback() }
-}
 
-class KorgeTester {
-    val goldensVfs = applicationVfs["goldens"]
-}
 
 class KorgeHeadlessTest {
     @Test
@@ -80,47 +74,6 @@ class KorgeHeadlessTest {
                 //            }
 
                 views.gameWindow.close()
-            }
-        println("went here?!")
-        assert(true)
-    }
-
-    @Test
-    //    @Ignore
-    fun test2() = korgeTest {
-        System.setProperty("java.awt.headless", "false")
-//        val gameWindow = Korge(width = 512, height = 512, bgcolor = Colors["#2b2b2b"]) {
-        val gameWindow = Korge(width = 512, height = 512, bgcolor = Colors.RED) {
-                val views = injector.get<Views>()
-                val minDegrees = (-16).degrees
-                val maxDegrees = (+16).degrees
-
-                val image = solidRect(100, 100, Colors.YELLOW) {
-                    rotation = maxDegrees
-                    anchor(.5, .5)
-                    scale(.8)
-                    position(256, 256)
-                }
-
-                println("applicationVfs: $applicationVfs")
-                println("localCurrentDirVfs: ${localCurrentDirVfs}")
-                println("rootLocalVfs: ${rootLocalVfs}")
-                println("tempVfs: ${tempVfs}")
-                println("standardVfs: ${standardVfs}")
-                println("applicationVfs[\"goldens\"]: ${applicationVfs["goldens"]}")
-
-                val ss1 = renderToBitmap(views)
-                //                val ss1 = (gameWindow as KorgeHeadless.HeadlessGameWindow).bitmap
-                resourcesVfs["ss2.png"].writeBitmap(ss1, PNG)
-
-                //            while (true) {
-                //                println("STEP")
-                //                image.tween(image::rotation[minDegrees], time = 0.5.seconds, easing = Easing.EASE_IN_OUT)
-                //                image.tween(image::rotation[maxDegrees], time = 0.5.seconds, easing = Easing.EASE_IN_OUT)
-                //                views.gameWindow.close() // We close the window, finalizing the test here
-                //            }
-
-//                views.gameWindow.close()
             }
         println("went here?!")
         assert(true)
