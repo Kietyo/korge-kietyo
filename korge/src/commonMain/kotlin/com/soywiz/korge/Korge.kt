@@ -79,7 +79,8 @@ object Korge {
     val logger = Logger("Korge")
     val DEFAULT_GAME_ID = "com.soywiz.korge.unknown"
 
-    suspend operator fun invoke(config: Config) {
+    suspend operator fun invoke(config: Config,
+                                entry: (suspend Stage.() -> Unit)? = null) {
         //println("Korge started from Config")
         val module = config.module
         val windowSize = module.windowSize
@@ -123,7 +124,7 @@ object Korge {
             settingsFolder = config.settingsFolder,
             batchMaxQuads = config.batchMaxQuads,
             multithreaded = config.multithreaded,
-            entry = {
+            entry = entry ?: {
                 //println("Korge views prepared for Config")
                 RegisteredImageFormats.register(*module.imageFormats.toTypedArray())
                 val injector = config.injector
@@ -155,16 +156,6 @@ object Korge {
         )
     }
 
-    suspend operator fun invoke(
-        config: Config,
-        entry: suspend Stage.() -> Unit
-    ) {
-        invoke(
-            title = config.title,
-            width = config.
-        )
-    }
-
     // Context: Deprecated in version 3.0.0
     // Don't remove fully till version 3.2+
     @Deprecated(
@@ -173,8 +164,10 @@ object Korge {
     )
     suspend operator fun invoke(
         title: String = "Korge",
-        width: Int = DefaultViewport.WIDTH, height: Int = DefaultViewport.HEIGHT,
-        virtualWidth: Int = width, virtualHeight: Int = height,
+        width: Int = DefaultViewport.WIDTH,
+        height: Int = DefaultViewport.HEIGHT,
+        virtualWidth: Int = width,
+        virtualHeight: Int = height,
         icon: Bitmap? = null,
         iconPath: String? = null,
         //iconDrawable: SizedDrawable? = null,
@@ -669,7 +662,7 @@ object Korge {
         val multithreaded: Boolean? = null,
         val main: (suspend Stage.() -> Unit)? = module.main,
         val constructedScene: Scene.(Views) -> Unit = module.constructedScene,
-        val constructedViews: (Views) -> Unit = module.constructedViews,
+        val constructedViews: (Views) -> Unit = module.constructedViews
     ) {
         val finalWindowSize: ISizeInt
             get() = windowSize
@@ -680,10 +673,5 @@ object Korge {
     }
 
     data class ModuleArgs(val args: Array<String>)
-
-    val DEFAULT_CONFIG = Config(
-        title = "Korge",
-        windowSize = ISizeInt(DefaultViewport.WIDTH, DefaultViewport.HEIGHT)
-    )
 }
 
