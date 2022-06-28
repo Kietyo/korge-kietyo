@@ -165,6 +165,8 @@ object Korge {
         )
     }
 
+    // Context: Deprecated in version 3.0.0
+    // Don't remove fully till version 3.2+
     @Deprecated(
         "Use invoke() with config param instead.",
         replaceWith = ReplaceWith("invoke(config: Config, entry: suspend Stage.() -> Unit)")
