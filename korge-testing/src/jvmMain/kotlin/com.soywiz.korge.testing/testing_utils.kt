@@ -84,7 +84,6 @@ inline fun korgeScreenshotTest(
                         val viewsToAlign = mutableListOf<View>()
                         container {
                             viewsToAlign += text("Test method name: ${results.testMethodName}")
-//                            val testResultSection = container {
                             viewsToAlign += text("Golden name: ${testResult.goldenName}")
                             viewsToAlign += container {
                                 val fn = { headerText: String, bitmap: Bitmap? ->
@@ -141,11 +140,11 @@ inline fun korgeScreenshotTest(
                                 onClick {
                                     val goldenFileNameWithExt =
                                         context.makeGoldenFileNameWithExtension(testResult.goldenName)
-                                    if (testResult.oldBitmap != null && testResult.newBitmap != null) {
+                                    if (testResult.newBitmap != null) {
                                         context.tempGoldensVfs[goldenFileNameWithExt].copyTo(
                                             context.testGoldensVfs[goldenFileNameWithExt]
                                         )
-                                    } else if (testResult.oldBitmap != null && testResult.newBitmap == null) {
+                                    } else {
                                         // Bitmap was deleted
                                         context.testGoldensVfs[goldenFileNameWithExt].delete()
                                     }
@@ -156,7 +155,6 @@ inline fun korgeScreenshotTest(
                             viewsToAlign.windowed(2) {
                                 it[1].alignTopToBottomOf(it[0])
                             }
-
 
                             val sectionBg =
                                 solidRect(scaledWidth, scaledHeight, Colors.DARKSLATEGRAY)

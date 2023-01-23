@@ -1,0 +1,5 @@
+description = "Korge testing library."
+
+dependencies {
+    jvmMainApi(project(":korge"))
+}
