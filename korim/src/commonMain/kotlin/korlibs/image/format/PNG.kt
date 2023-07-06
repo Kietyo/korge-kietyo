@@ -88,7 +88,7 @@ object PNG : ImageFormat("png") {
 
 	override fun decodeHeader(s: SyncStream, props: ImageDecodingProps): ImageInfo? = try {
         val info = ImageInfo()
-		val header = readCommon(s, readHeader = true, info = info) as Header
+		val header = readCommon(s, readHeader = true, _info = info) as Header
         info
 	} catch (t: Throwable) {
 		null
@@ -272,7 +272,8 @@ object PNG : ImageFormat("png") {
         return score
     }
 
-	private fun readCommon(s: SyncStream, readHeader: Boolean, info: ImageInfo = ImageInfo()): Any? {
+	private fun readCommon(s: SyncStream, readHeader: Boolean, _info: ImageInfo = ImageInfo()): Any? {
+        var resultInfo = _info
 		val magic = s.readS32BE()
 		if (magic != MAGIC1) throw IllegalArgumentException("Invalid PNG file magic: ${magic.hex}!=${MAGIC1.hex}")
 		s.readS32BE() // magic continuation
@@ -303,9 +304,7 @@ object PNG : ImageFormat("png") {
 							filtermethod = readU8(),
 							interlacemethod = readU8()
 						).also {
-                            info.width = it.width
-                            info.height = it.height
-                            info.bitsPerPixel = it.bitsPerChannel * it.colorspace.nchannels
+                            resultInfo = ImageInfo(it.width, it.height, it.bitsPerChannel * it.colorspace.nchannels)
                         }
 					}
 				}
@@ -324,7 +323,7 @@ object PNG : ImageFormat("png") {
 					pngdata.append(data.readAll())
 				}
                 "eXIf" -> {
-                    runBlockingNoSuspensions { EXIF.readExifBase(data.readAll().openAsync(), info) }
+                    runBlockingNoSuspensions { EXIF.readExifBase(data.readAll().openAsync(), resultInfo) }
                 }
 				"IEND" -> {
                     return false

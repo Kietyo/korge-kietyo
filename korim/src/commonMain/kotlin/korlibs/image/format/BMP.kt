@@ -55,13 +55,11 @@ object BMP : ImageFormat("bmp") {
             abs(width),
             abs(height),
             bitcount,
-
-        ).apply {
-            this.compression = compression
-            this.sizeImage = sizeImage
-            this.flipX = width < 0
-            this.flipY = height >= 0
-		}
+            width < 0,
+            height >= 0,
+            compression,
+            sizeImage
+        )
 	}
 
 	override fun readImage(s: SyncStream, props: ImageDecodingProps): ImageData {

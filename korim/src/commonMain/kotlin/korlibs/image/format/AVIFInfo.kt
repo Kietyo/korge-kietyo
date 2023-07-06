@@ -178,8 +178,7 @@ open class ISOBMFF(vararg exts: String) : ImageFormatSuspend(*exts) {
                     "ipco" -> decodeLevel(blockStream, level + 1)
                     "ispe" -> {
                         blockStream.skip(4)
-                        info.width = blockStream.readS32BE()
-                        info.height = blockStream.readS32BE()
+                        info = ImageInfo(blockStream.readS32BE(), blockStream.readS32BE())
                     }
                     "mdat" -> {
                         blockStream.skip(4)

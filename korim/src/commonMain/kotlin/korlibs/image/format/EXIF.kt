@@ -35,7 +35,8 @@ object EXIF {
         readExifFromJpeg(this, info, debug)
     }
 
-    suspend fun readExifFromJpeg(s: AsyncStream, info: ImageInfo = ImageInfo(), debug: Boolean = false): ImageInfo {
+    suspend fun readExifFromJpeg(s: AsyncStream, _info: ImageInfo = ImageInfo(), debug: Boolean = false): ImageInfo {
+        var resultInfo = _info
         val jpegHeader = s.readU16BE()
         if (jpegHeader != 0xFFD8) error("Not a JPEG file ${jpegHeader.hex}")
         while (!s.eof()) {
@@ -49,17 +50,15 @@ object EXIF {
             when (sectionType) {
                 0xFFE1 -> { // APP1
                     val fs = ss.readAllAsFastStream()
-                    readExif(fs, info, debug)
+                    readExif(fs, resultInfo, debug)
                 }
                 0xFFC0 -> { // SOF0
                     val precision = ss.readU8()
-                    info.width = ss.readU16BE()
-                    info.height = ss.readU16BE()
-                    info.bitsPerPixel = 24
+                    resultInfo = ImageInfo(ss.readU16BE(), ss.readU16BE(), 24)
                 }
                 0xFFDA -> { // SOS (starts data)
                     // END HERE, we don't want to read the data itself
-                    return info
+                    return resultInfo
                 }
             }
         }
