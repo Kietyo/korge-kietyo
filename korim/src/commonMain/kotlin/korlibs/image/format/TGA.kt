@@ -17,9 +17,7 @@ import korlibs.io.stream.writeBytes
 object TGA : ImageFormat("tga") {
 	override fun decodeHeader(s: SyncStream, props: ImageDecodingProps): ImageInfo? = kotlin.runCatching {
         val h = readHeader(s)
-        ImageInfo(h.width, h.height).apply {
-            bitsPerPixel = h.bitsPerPixel
-        }
+        ImageInfo(h.width, h.height, h.bitsPerPixel)
     }.getOrNull()
 
 	class Info(
