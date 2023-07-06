@@ -21,10 +21,7 @@ data class NativeImageResult(
 abstract class NativeImageFormatProvider : ImageFormatEncoderDecoder {
     protected open suspend fun decodeHeaderInternal(data: ByteArray): ImageInfo {
         val result = decodeInternal(data, ImageDecodingProps.DEFAULT)
-        return ImageInfo().also {
-            it.width = result.originalWidth
-            it.height = result.originalHeight
-        }
+        return ImageInfo(result.originalWidth, result.originalHeight)
     }
 
     override suspend fun encodeSuspend(image: ImageDataContainer, props: ImageEncodingProps): ByteArray = throw UnsupportedOperationException()

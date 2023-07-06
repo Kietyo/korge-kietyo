@@ -22,11 +22,13 @@ import kotlin.math.abs
 
 @Suppress("UNUSED_VARIABLE")
 object BMP : ImageFormat("bmp") {
-    class BmImageInfo : ImageInfo() {
-        var flipX: Boolean = false
-        var flipY: Boolean = false
-        var compression: Int = 0
-        var sizeImage: Int = 0
+    class BmImageInfo(
+        width: Int, height: Int, bitsPerPixel: Int,
+        val flipX: Boolean = false,
+        val flipY: Boolean = false,
+        val compression: Int = 0,
+        val sizeImage: Int = 0,
+    ) : ImageInfo(width, height, bitsPerPixel) {
     }
 
 	override fun decodeHeader(s: SyncStream, props: ImageDecodingProps): BmImageInfo? {
@@ -49,14 +51,16 @@ object BMP : ImageFormat("bmp") {
         val pixelsPerMeterY = ss.readS32LE()
         val clrUsed = ss.readS32LE()
         val clrImportant = ss.readS32LE()
-		return BmImageInfo().apply {
+		return BmImageInfo(
+            abs(width),
+            abs(height),
+            bitcount,
+
+        ).apply {
             this.compression = compression
             this.sizeImage = sizeImage
             this.flipX = width < 0
             this.flipY = height >= 0
-			this.width = abs(width)
-			this.height = abs(height)
-			this.bitsPerPixel = bitcount
 		}
 	}
 

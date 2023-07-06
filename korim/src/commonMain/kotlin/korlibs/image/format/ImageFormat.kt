@@ -59,11 +59,7 @@ abstract class ImageFormat(vararg exts: String) : ImageFormatEncoderDecoder {
 	open fun decodeHeader(s: SyncStream, props: ImageDecodingProps = ImageDecodingProps.DEFAULT): ImageInfo? =
 		runIgnoringExceptions(show = true) {
 			val bmp = read(s, props)
-			ImageInfo().apply {
-				this.width = bmp.width
-				this.height = bmp.height
-				this.bitsPerPixel = bmp.bpp
-			}
+			ImageInfo(bmp.width, bmp.height, bmp.bitsPerPixel)
 		}
 
 	fun read(s: SyncStream, filename: String = "unknown"): Bitmap =

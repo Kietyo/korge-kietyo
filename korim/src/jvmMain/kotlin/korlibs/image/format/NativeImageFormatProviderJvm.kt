@@ -37,10 +37,7 @@ open class AwtNativeImageFormatProvider : NativeImageFormatProvider() {
                 val reader: ImageReader = readers.next()
                 return try {
                     reader.input = `in`
-                    ImageInfo {
-                        width = reader.getWidth(0)
-                        height = reader.getHeight(0)
-                    }
+                    ImageInfo(reader.getWidth(0), reader.getHeight(0))
                 } finally {
                     reader.dispose()
                 }

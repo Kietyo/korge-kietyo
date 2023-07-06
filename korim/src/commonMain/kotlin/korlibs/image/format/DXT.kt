@@ -86,10 +86,7 @@ abstract class DXT(val format: String, val premultiplied: Boolean, val blockSize
 
 	override fun decodeHeader(s: SyncStream, props: ImageDecodingProps): ImageInfo? {
 		if (!PathInfo(props.filename).extensionLC.startsWith(format)) return null
-		return ImageInfo().apply {
-			width = props.width ?: 1
-			height = props.height ?: 1
-		}
+		return ImageInfo(props.width ?: 1, props.height ?: 1)
 	}
 
 	fun decodeBitmap(bytes: ByteArray, width: Int, height: Int): Bitmap32 {

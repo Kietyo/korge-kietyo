@@ -16,10 +16,7 @@ object SVG : ImageFormat("svg") {
             try {
                 val content = s.sliceStart().readAll().toString(UTF8).trim()
                 val svg = korlibs.image.vector.format.SVG(content)
-                ImageInfo().apply {
-                    width = svg.width
-                    height = svg.height
-                }
+                ImageInfo(svg.width, svg.height)
             } catch (e: Throwable) {
                 e.printStackTrace()
                 null

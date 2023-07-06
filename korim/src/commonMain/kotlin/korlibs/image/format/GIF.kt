@@ -19,10 +19,7 @@ object GIF : ImageFormat("gif") {
     override fun decodeHeader(s: SyncStream, props: ImageDecodingProps): ImageInfo? {
         try {
             val gif = GifDec.gd_open_gif(s.clone())
-            return ImageInfo().also {
-                it.bitsPerPixel = 32
-                it.width = gif.width
-                it.height = gif.height
+            return ImageInfo(gif.width, gif.height, 32).also {
                 GifDec.gd_close_gif(gif)
             }
         } catch (e: Throwable) {

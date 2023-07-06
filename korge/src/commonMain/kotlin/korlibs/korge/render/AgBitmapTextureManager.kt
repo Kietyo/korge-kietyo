@@ -147,7 +147,7 @@ class AgBitmapTextureManager(
 		return textureInfo
 	}
 
-    private val Bitmap.estimateSizeInBytes: Int get() = height * (width * bpp / 8)
+    private val Bitmap.estimateSizeInBytes: Int get() = height * (width * bitsPerPixel / 8)
 
     /** Obtains a temporal [TextureBase] from [bitmap] [Bitmap]. The texture shouldn't be stored, but used for drawing since it will be destroyed once not used anymore. */
 	fun getTextureBase(bitmap: Bitmap): TextureBase = getTextureInfo(bitmap).textureBase!!

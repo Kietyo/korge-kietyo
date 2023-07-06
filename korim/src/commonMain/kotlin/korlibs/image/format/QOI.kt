@@ -32,11 +32,7 @@ object QOI : ImageFormat("qoi") {
         val height = s.readS32BE()
         val channels = s.readU8()
         val colorspace = s.readU8()
-        return ImageInfo {
-            this.width = width
-            this.height = height
-            this.bitsPerPixel = channels * 8
-        }
+        return ImageInfo(width, height, channels * 8)
     }
 
     /*

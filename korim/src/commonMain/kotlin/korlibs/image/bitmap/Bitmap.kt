@@ -18,7 +18,7 @@ import kotlin.math.min
 abstract class Bitmap(
     val width: Int,
     val height: Int,
-    val bpp: Int,
+    val bitsPerPixel: Int,
     premultiplied: Boolean,
     val backingArray: Any?
 ) : SizeableInt, Extra by Extra.Mixin() {
@@ -49,7 +49,7 @@ abstract class Bitmap(
     /** Specifies whether mipmaps should be created for this [Bitmap] */
     var mipmaps: Boolean = false
 
-    val stride: Int get() = (width * bpp) / 8
+    val stride: Int get() = (width * bitsPerPixel) / 8
     val area: Int get() = width * height
     fun index(x: Int, y: Int) = y * width + x
     fun inside(x: Int, y: Int) = x in 0 until width && y in 0 until height

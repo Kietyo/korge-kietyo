@@ -40,7 +40,7 @@ open class ImageData constructor(
         if (it.main) {
             Int.MAX_VALUE
         } else {
-            it.bitmap.width * it.bitmap.height * (it.bitmap.bpp * it.bitmap.bpp)
+            it.bitmap.width * it.bitmap.height * (it.bitmap.bitsPerPixel * it.bitmap.bitsPerPixel)
         }
     }
 

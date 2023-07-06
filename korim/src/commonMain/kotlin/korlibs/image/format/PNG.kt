@@ -170,7 +170,7 @@ object PNG : ImageFormat("png") {
         val bmp8: Bitmap8? = bmp as? Bitmap8?
         val bmp32: Bitmap32? = bmp as? Bitmap32?
 
-        val Bpp = bitmap.bpp divCeil  8
+        val Bpp = bitmap.bitsPerPixel divCeil  8
         val scanline = width * Bpp
         val prev = UByteArrayInt(scanline)
         val currs = Array(3) { UByteArrayInt(scanline) }

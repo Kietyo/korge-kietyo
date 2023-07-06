@@ -46,11 +46,7 @@ object ASE : ImageFormatWithContainer("ase") {
         val width = ss.readU16LE()
         val height = ss.readU16LE()
         val bitsPerPixel = ss.readU16LE()
-        return ImageInfo().also {
-            it.bitsPerPixel = bitsPerPixel
-            it.width = width
-            it.height = height
-        }
+        return ImageInfo(width, height, bitsPerPixel)
     }
 
     interface AseEntity {

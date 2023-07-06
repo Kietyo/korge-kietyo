@@ -18,7 +18,7 @@ abstract class BitmapIndexed(
 		if (bytes.size < width * height / (8 / bpp)) throw RuntimeException("Bitmap data is too short: width=$width, height=$height, data=ByteArray(${data.size}), area=${width * height}")
 	}
 
-	override fun toString() = "BitmapIndexed(bpp=$bpp, width=$width, height=$height, clut=${palette.size})"
+	override fun toString() = "BitmapIndexed(bpp=$bitsPerPixel, width=$width, height=$height, clut=${palette.size})"
 
 	protected val temp = ByteArray(max(width, height))
 
@@ -37,13 +37,13 @@ abstract class BitmapIndexed(
         val iD = index_d(n)
         val iM = index_m(n)
         //println("[$n]: $iD, $iM :: bpp=$bpp, n8_dbpp=$n8_dbpp, n8_mask=$n8_dbpp")
-        return datau[iD].extract(bpp * iM, bpp)
+        return datau[iD].extract(bitsPerPixel * iM, bitsPerPixel)
     }
     open fun setIntIndex(n: Int, color: Int) {
         val iD = index_d(n)
         val iM = index_m(n)
         //println("[$n]: $iD, $iM")
-        datau[iD] = datau[iD].insert(color, bpp * iM, bpp)
+        datau[iD] = datau[iD].insert(color, bitsPerPixel * iM, bitsPerPixel)
     }
 
 	override fun getRgbaRaw(x: Int, y: Int): RGBA = palette[this[x, y]]

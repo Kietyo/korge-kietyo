@@ -41,10 +41,7 @@ object DDS : ImageFormat("dds") {
 
 		val reserved2 = sh.readS32LE()
 
-		return ImageInfo().apply {
-			this.width = width
-			this.height = height
-			this.bitsPerPixel = 32
+		return ImageInfo(width, height, 32).apply {
 			this.fourcc = pf_fourcc
 		}
 	}
