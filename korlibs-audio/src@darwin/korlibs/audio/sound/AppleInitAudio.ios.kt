@@ -1,6 +1,5 @@
 package korlibs.audio.sound
 
-import korlibs.io.lang.printStackTrace
 import kotlinx.cinterop.*
 import platform.AVFAudio.*
 import platform.Foundation.*

@@ -1,6 +1,5 @@
 
-import korlibs.*
-import korlibs.korge.gradle.generate.*
+import korlibs.applyProjectProperties
 
 description = "Korlibs Audio Library"
 

@@ -1,10 +1,12 @@
 package korlibs.audio.sound
 
-import korlibs.audio.sound.backend.*
-import korlibs.datastructure.thread.*
-import korlibs.io.time.*
-import korlibs.logger.*
-import korlibs.platform.*
+import korlibs.audio.sound.backend.AwtNativeSoundProvider
+import korlibs.audio.sound.backend.jvmCoreAudioNativeSoundProvider
+import korlibs.audio.sound.backend.jvmWaveOutNativeSoundProvider
+import korlibs.datastructure.thread.nativeThread
+import korlibs.io.time.traceTime
+import korlibs.logger.Logger
+import korlibs.platform.Platform
 
 private val logger = Logger("NativeSoundProviderJvm")
 

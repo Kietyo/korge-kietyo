@@ -1,11 +1,22 @@
 package korlibs.audio.sound.backend
 
-import korlibs.audio.sound.*
-import korlibs.datastructure.thread.*
-import korlibs.ffi.*
-import korlibs.io.lang.*
-import korlibs.memory.*
-import kotlin.coroutines.*
+import korlibs.audio.sound.AudioSamplesInterleaved
+import korlibs.audio.sound.NativeSoundProvider
+import korlibs.audio.sound.NativeSoundProviderNew
+import korlibs.audio.sound.NewPlatformAudioOutput
+import korlibs.datastructure.thread.NativeThread
+import korlibs.ffi.FFIArena
+import korlibs.ffi.FFILib
+import korlibs.ffi.FFIPointer
+import korlibs.ffi.FFIStructure
+import korlibs.ffi.ffiScoped
+import korlibs.ffi.get
+import korlibs.ffi.reinterpret
+import korlibs.ffi.set
+import korlibs.ffi.typed
+import korlibs.io.lang.Thread_sleep
+import korlibs.memory.hasFlags
+import kotlin.coroutines.CoroutineContext
 
 val jvmWaveOutNativeSoundProvider: NativeSoundProvider? by lazy {
     JvmWaveOutNativeSoundProvider()

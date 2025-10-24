@@ -1,12 +1,16 @@
 package korlibs.audio.sound
 
-import android.content.*
-import android.media.*
-import android.os.*
-import korlibs.datastructure.pauseable.*
-import korlibs.datastructure.thread.*
-import korlibs.io.android.*
-import kotlin.coroutines.*
+import android.content.Context
+import android.media.AudioAttributes
+import android.media.AudioFormat
+import android.media.AudioManager
+import android.media.AudioTrack
+import android.os.Build
+import korlibs.datastructure.pauseable.SyncPauseable
+import korlibs.datastructure.thread.NativeThread
+import korlibs.datastructure.thread.nativeThread
+import korlibs.io.android.AndroidCoroutineContext
+import kotlin.coroutines.CoroutineContext
 
 actual val nativeSoundProvider: NativeSoundProvider by lazy { AndroidNativeSoundProvider() }
 

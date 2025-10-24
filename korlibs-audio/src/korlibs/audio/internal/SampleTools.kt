@@ -1,9 +1,9 @@
 package korlibs.audio.internal
 
 import korlibs.datastructure.ByteArrayDeque
-import korlibs.memory.arraycopy
 import korlibs.io.stream.AsyncStream
 import korlibs.io.stream.SyncStream
+import korlibs.memory.arraycopy
 
 internal fun List<ShortArray>.combine(): ShortArray {
     val combined = ShortArray(this.sumBy { it.size })

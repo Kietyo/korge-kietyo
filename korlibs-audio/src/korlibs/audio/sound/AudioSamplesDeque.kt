@@ -1,7 +1,7 @@
 package korlibs.audio.sound
 
-import korlibs.datastructure.ShortArrayDeque
 import korlibs.audio.internal.SampleConvert
+import korlibs.datastructure.ShortArrayDeque
 import kotlin.math.min
 
 class AudioSamplesDeque(val channels: Int) {

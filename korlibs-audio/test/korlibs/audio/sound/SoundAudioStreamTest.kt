@@ -1,14 +1,16 @@
 package korlibs.audio.sound
 
 import doIOTest
-import korlibs.io.async.*
-import korlibs.io.file.std.*
-import korlibs.io.lang.*
-import korlibs.logger.*
-import korlibs.platform.*
-import korlibs.time.*
-import kotlinx.coroutines.*
-import kotlin.test.*
+import korlibs.io.async.suspendTest
+import korlibs.io.file.std.resourcesVfs
+import korlibs.io.lang.currentThreadId
+import korlibs.logger.Logger
+import korlibs.platform.Platform
+import korlibs.time.milliseconds
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.delay
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class SoundAudioStreamTest {
     val logger = Logger("SoundAudioStreamTest")

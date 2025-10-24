@@ -1,10 +1,16 @@
 package korlibs.audio.sound.backend
 
-import korlibs.audio.sound.*
-import korlibs.datastructure.thread.*
-import korlibs.ffi.*
-import korlibs.io.lang.*
-import kotlin.coroutines.*
+import korlibs.audio.sound.AudioSamplesInterleaved
+import korlibs.audio.sound.NativeSoundProvider
+import korlibs.audio.sound.NewPlatformAudioOutput
+import korlibs.datastructure.thread.NativeThread
+import korlibs.datastructure.thread.nativeThread
+import korlibs.ffi.FFILib
+import korlibs.ffi.FFIPointer
+import korlibs.ffi.FFIPointerArray
+import korlibs.ffi.address
+import korlibs.io.lang.Thread_sleep
+import kotlin.coroutines.CoroutineContext
 
 object FFIALSANativeSoundProvider : NativeSoundProvider() {
     override fun createNewPlatformAudioOutput(coroutineContext: CoroutineContext, channels: Int, frequency: Int, gen: (AudioSamplesInterleaved) -> Unit): NewPlatformAudioOutput {

@@ -1,7 +1,5 @@
 package korlibs.audio.sound
 
-import korlibs.time.TimeSpan
-import korlibs.time.seconds
 import korlibs.audio.format.AudioDecodingProps
 import korlibs.audio.format.AudioEncodingProps
 import korlibs.audio.format.AudioFormat
@@ -10,6 +8,8 @@ import korlibs.io.file.VfsFile
 import korlibs.io.file.VfsOpenMode
 import korlibs.io.file.baseName
 import korlibs.io.lang.Closeable
+import korlibs.time.TimeSpan
+import korlibs.time.seconds
 import kotlin.math.min
 
 abstract class AudioStream(

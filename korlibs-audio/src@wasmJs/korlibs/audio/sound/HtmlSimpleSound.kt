@@ -1,13 +1,13 @@
 package korlibs.audio.sound
 
+import korlibs.io.async.launchImmediately
+import korlibs.io.file.std.uniVfs
+import korlibs.io.lang.Cancellable
+import korlibs.io.util.toInt8Array
+import korlibs.logger.Logger
 import korlibs.time.DateTime
 import korlibs.time.TimeSpan
 import korlibs.time.seconds
-import korlibs.logger.Logger
-import korlibs.io.async.launchImmediately
-import korlibs.io.file.std.uniVfs
-import korlibs.io.lang.*
-import korlibs.io.util.*
 import kotlinx.browser.document
 import kotlinx.browser.window
 import kotlinx.coroutines.CancellationException
@@ -17,16 +17,14 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.job
 import org.khronos.webgl.ArrayBuffer
 import org.khronos.webgl.Float32Array
-import org.khronos.webgl.Int8Array
 import org.w3c.dom.Audio
 import org.w3c.dom.HTMLAudioElement
 import org.w3c.dom.HTMLMediaElement
-import org.w3c.dom.events.*
+import org.w3c.dom.events.Event
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
-import kotlin.js.unsafeCast
 
 private external interface WindowExSetTimeout : JsAny {
     fun setTimeout(block: () -> Unit, time: Int): Int

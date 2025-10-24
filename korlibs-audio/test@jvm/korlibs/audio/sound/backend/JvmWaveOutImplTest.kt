@@ -1,8 +1,9 @@
 package korlibs.audio.sound.backend
 
-import korlibs.audio.sound.*
-import korlibs.io.file.std.*
-import kotlinx.coroutines.*
+import korlibs.audio.sound.readMusic
+import korlibs.audio.sound.toStream
+import korlibs.io.file.std.resourcesVfs
+import kotlinx.coroutines.runBlocking
 
 class JvmWaveOutImplTest {
     companion object {

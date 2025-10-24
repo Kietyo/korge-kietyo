@@ -1,12 +1,12 @@
 package korlibs.audio.sound
 
-import korlibs.time.DateTime
-import korlibs.time.TimeSpan
-import korlibs.time.seconds
-import korlibs.logger.Logger
 import korlibs.io.async.launchImmediately
 import korlibs.io.file.std.uniVfs
 import korlibs.io.lang.Cancellable
+import korlibs.logger.Logger
+import korlibs.time.DateTime
+import korlibs.time.TimeSpan
+import korlibs.time.seconds
 import kotlinx.browser.document
 import kotlinx.browser.window
 import kotlinx.coroutines.CancellationException

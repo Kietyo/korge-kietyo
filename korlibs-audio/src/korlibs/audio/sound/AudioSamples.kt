@@ -1,11 +1,16 @@
 package korlibs.audio.sound
 
-import korlibs.audio.internal.*
-import korlibs.datastructure.iterators.*
-import korlibs.io.lang.*
-import korlibs.math.*
-import korlibs.memory.*
-import kotlin.math.*
+import korlibs.audio.internal.SampleConvert
+import korlibs.audio.internal.coerceToShort
+import korlibs.datastructure.iterators.fastForEach
+import korlibs.datastructure.iterators.fastForEachWithIndex
+import korlibs.io.lang.assert
+import korlibs.math.clamp01
+import korlibs.memory.arraycopy
+import korlibs.memory.arrayinterleave
+import kotlin.math.absoluteValue
+import kotlin.math.max
+import kotlin.math.min
 
 interface IAudioSamples {
     val channels: Int

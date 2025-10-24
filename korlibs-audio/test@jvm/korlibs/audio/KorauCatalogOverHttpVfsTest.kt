@@ -1,6 +1,5 @@
 package korlibs.audio
 
-import korlibs.time.milliseconds
 import korlibs.audio.format.readSoundInfo
 import korlibs.io.async.suspendTest
 import korlibs.io.file.std.MemoryVfsMix
@@ -9,6 +8,7 @@ import korlibs.io.file.std.resourcesVfs
 import korlibs.io.file.std.withCatalogJail
 import korlibs.io.net.http.FakeHttpServerClient
 import korlibs.io.net.http.router
+import korlibs.time.milliseconds
 import org.junit.Test
 import kotlin.test.assertEquals
 

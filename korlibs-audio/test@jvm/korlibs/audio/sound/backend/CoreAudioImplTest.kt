@@ -1,9 +1,11 @@
 package korlibs.audio.sound.backend
 
-import korlibs.time.*
-import korlibs.audio.sound.*
-import korlibs.io.file.std.*
-import kotlinx.coroutines.*
+import korlibs.audio.sound.readSound
+import korlibs.audio.sound.toStream
+import korlibs.io.file.std.resourcesVfs
+import korlibs.time.seconds
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 
 class CoreAudioImplTest {
     companion object {

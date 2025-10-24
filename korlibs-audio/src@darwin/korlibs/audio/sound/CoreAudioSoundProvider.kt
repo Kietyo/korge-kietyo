@@ -4,18 +4,12 @@ package korlibs.audio.sound
 import cnames.structs.OpaqueAudioQueue
 import korlibs.memory.*
 import kotlinx.cinterop.*
-import kotlinx.cinterop.COpaquePointer
-import kotlinx.cinterop.ShortVar
-import kotlinx.cinterop.convert
 import platform.AudioToolbox.*
 import platform.AudioToolbox.AudioQueueBufferRef
 import platform.AudioToolbox.AudioQueueRef
 import platform.CoreAudioTypes.*
 import platform.darwin.OSStatus
 import platform.posix.*
-import kotlin.Int
-import kotlin.String
-import kotlin.Unit
 import kotlin.coroutines.*
 
 actual val nativeSoundProvider: NativeSoundProvider get() = CORE_AUDIO_NATIVE_SOUND_PROVIDER

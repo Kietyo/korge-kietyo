@@ -1,15 +1,15 @@
 package korlibs.audio.sound
 
-import korlibs.time.TimeSpan
-import korlibs.time.seconds
 import korlibs.audio.format.AudioDecodingProps
 import korlibs.audio.internal.SampleConvert
 import korlibs.io.file.Vfs
 import korlibs.io.file.std.LocalVfs
 import korlibs.io.file.std.UrlVfs
 import korlibs.io.lang.invalidOp
+import korlibs.time.TimeSpan
+import korlibs.time.seconds
 import kotlinx.coroutines.CompletableDeferred
-import org.khronos.webgl.*
+import org.khronos.webgl.get
 import org.w3c.dom.HTMLAudioElement
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.coroutineContext

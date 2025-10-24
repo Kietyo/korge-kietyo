@@ -1,13 +1,24 @@
 package korlibs.audio.sound.backend
 
-import com.sun.jna.*
-import korlibs.audio.sound.*
-import korlibs.ffi.*
-import korlibs.io.annotations.*
-import korlibs.io.concurrent.atomic.*
-import java.util.concurrent.*
-import java.util.concurrent.atomic.*
-import kotlin.coroutines.*
+import com.sun.jna.Callback
+import com.sun.jna.CallbackThreadInitializer
+import com.sun.jna.Memory
+import com.sun.jna.Native
+import com.sun.jna.Pointer
+import korlibs.audio.sound.AudioSamplesInterleaved
+import korlibs.audio.sound.NativeSoundProviderNew
+import korlibs.audio.sound.NewPlatformAudioOutput
+import korlibs.ffi.FFIPointer
+import korlibs.ffi.FFIStructure
+import korlibs.ffi.address
+import korlibs.ffi.set
+import korlibs.io.annotations.Keep
+import korlibs.io.concurrent.atomic.KorAtomicRef
+import korlibs.io.concurrent.atomic.getValue
+import korlibs.io.concurrent.atomic.setValue
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.atomic.AtomicLong
+import kotlin.coroutines.CoroutineContext
 
 val jvmCoreAudioNativeSoundProvider: JvmCoreAudioNativeSoundProvider? by lazy {
     try {

@@ -1,14 +1,19 @@
 package korlibs.audio.sound
 
-import korlibs.audio.format.*
-import korlibs.audio.internal.*
-import korlibs.io.file.*
-import korlibs.io.file.std.*
-import korlibs.io.lang.*
-import korlibs.memory.*
-import korlibs.platform.*
-import korlibs.time.*
-import kotlin.coroutines.*
+import korlibs.audio.format.AudioDecodingProps
+import korlibs.audio.internal.SampleConvert
+import korlibs.io.file.Vfs
+import korlibs.io.file.std.LocalVfs
+import korlibs.io.file.std.UrlVfs
+import korlibs.io.lang.Cancellable
+import korlibs.io.lang.cancel
+import korlibs.io.lang.invalidOp
+import korlibs.memory.getSampled
+import korlibs.platform.Platform
+import korlibs.time.TimeSpan
+import korlibs.time.seconds
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.coroutineContext
 
 actual val nativeSoundProvider: NativeSoundProvider by lazy {
     if (Platform.isJsBrowser) {
