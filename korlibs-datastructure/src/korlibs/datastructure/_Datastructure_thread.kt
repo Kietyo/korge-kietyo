@@ -2,8 +2,9 @@
 
 package korlibs.datastructure.thread
 
-import korlibs.datastructure.*
-import korlibs.time.*
+import korlibs.datastructure.Extra
+import korlibs.time.DateTime
+import korlibs.time.TimeSpan
 import korlibs.concurrent.thread.sleep as sleepConcurrent
 import korlibs.concurrent.thread.sleepExact as sleepExactConcurrent
 import korlibs.concurrent.thread.sleepWhile as sleepWhileConcurrent

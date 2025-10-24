@@ -1,7 +1,9 @@
 package korlibs.datastructure.thread
 
-import korlibs.datastructure.*
-import kotlin.test.*
+import korlibs.datastructure.getExtra
+import korlibs.datastructure.setExtra
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class ThreadTest {
     @Test

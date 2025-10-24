@@ -12,6 +12,6 @@ project.extensions.extraProperties.properties.apply {
 
 dependencies {
     commonMainApi(project(":korlibs-io"))
-    commonMainApi(project(":korlibs-ffi"))
+//    commonMainApi(project(":korlibs-ffi"))
     commonTestApi(libs.kotlinx.coroutines.test)
 }

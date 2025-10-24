@@ -2,9 +2,9 @@
 
 package korlibs.datastructure.lock
 
-import korlibs.time.*
-import korlibs.concurrent.lock.waitPrecise as waitPreciseConcurrent
+import korlibs.time.TimeSpan
 import korlibs.concurrent.lock.wait as waitConcurrent
+import korlibs.concurrent.lock.waitPrecise as waitPreciseConcurrent
 
 @Deprecated("Use korlibs.concurrent.lock package")
 typealias BaseLock = korlibs.concurrent.lock.BaseLock

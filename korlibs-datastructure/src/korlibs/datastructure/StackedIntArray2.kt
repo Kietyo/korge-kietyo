@@ -1,9 +1,7 @@
 package korlibs.datastructure
 
-import korlibs.datastructure.ds.*
 import korlibs.datastructure.internal.memory.Memory.arraycopy
-import korlibs.datastructure.iterators.*
-import kotlin.math.*
+import korlibs.datastructure.iterators.fastForEach
 
 interface IStackedIntArray2 : IStackedArray2<Int> {
     /** The [empty] value that will be returned if the specified cell it out of bounds, or empty */

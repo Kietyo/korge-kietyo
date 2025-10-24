@@ -2,18 +2,9 @@
 
 package korlibs.datastructure
 
-import korlibs.datastructure.internal.*
+import korlibs.datastructure.internal.fill
 import korlibs.datastructure.internal.math.Math.ilog2Ceil
 import korlibs.datastructure.iterators.fastForEach
-import kotlin.collections.Collection
-import kotlin.collections.Iterable
-import kotlin.collections.Map
-import kotlin.collections.associateWith
-import kotlin.collections.component1
-import kotlin.collections.component2
-import kotlin.collections.copyOf
-import kotlin.collections.indices
-import kotlin.collections.iterator
 import kotlin.contracts.ExperimentalContracts
 import kotlin.math.max
 

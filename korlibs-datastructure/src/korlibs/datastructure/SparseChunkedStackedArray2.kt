@@ -1,7 +1,9 @@
 package korlibs.datastructure
 
-import korlibs.datastructure.ds.*
-import kotlin.math.*
+import korlibs.datastructure.ds.BVH
+import korlibs.datastructure.ds.BVHIntervals
+import kotlin.math.max
+import kotlin.math.min
 
 abstract class SparseChunkedStackedArray2<TStackedArray2 : IStackedArray2Base>() : IStackedArray2Base {
     override var contentVersion: Int = 0 ; protected set

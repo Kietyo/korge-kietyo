@@ -3,6 +3,8 @@
 package korlibs.datastructure.algo
 
 import korlibs.datastructure.*
+import korlibs.datastructure.algo.Historiogram.Companion.values
+import korlibs.datastructure.algo.RLE.Companion.emit
 import korlibs.datastructure.lock.*
 
 /**
