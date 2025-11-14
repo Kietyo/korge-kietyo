@@ -45,7 +45,6 @@ class KProjectPlugin : Plugin<Project> {
             // Do not include K/N (iOS) on Windows or Linux (only on Macos)
             if (name.isKotlinNative && !korlibs.korge.gradle.targets.isMacos) return false
             // Do not include WASM is globally disabled
-            if (name.isWasmJs && !korlibs.korge.gradle.targets.wasm.isWasmEnabled(null)) return false
             return info2.hasTarget(name)
         }
 

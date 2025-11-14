@@ -289,7 +289,7 @@ object RootKorlibsPlugin {
                         }
                         AddFreeCompilerArgs.addFreeCompilerArgs(project, this)
                     }
-                    if (isWasmEnabled(project)) {
+                    if (true) {
                         configureWasmTarget(executable = false)
                         val wasmBrowserTest = tasks.getByName("wasmJsBrowserTest") as KotlinJsTest
                         // ~/projects/korge/build/js/packages/korge-root-klock-wasm-test
@@ -411,7 +411,7 @@ object RootKorlibsPlugin {
                             }
                         }
 
-                        if (isWasmEnabled(project)) {
+                        if (true) {
                             val wasm = createPairSourceSet("wasmJs", common, project = project) { test ->
                                 dependencies {
                                     if (test) {
@@ -486,9 +486,7 @@ object RootKorlibsPlugin {
 
     fun Project.initSamples() {
         rootProject.samples {
-            if (isWasmEnabled(project)) {
-                configureWasm(ProjectType.EXECUTABLE, binaryen = false)
-            }
+            configureWasm(ProjectType.EXECUTABLE, binaryen = false)
 
             // @TODO: Move to KorGE plugin
             project.configureJvmRunJvm(isRootKorlibs = true)

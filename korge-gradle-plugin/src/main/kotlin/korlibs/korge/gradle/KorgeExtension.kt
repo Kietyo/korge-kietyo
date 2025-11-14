@@ -259,36 +259,13 @@ open class KorgeExtension(
         }
     }
 
-    @Deprecated("Use targetWasmJs instead", ReplaceWith("targetWasmJs(binaryen)"))
-    fun targetWasm(binaryen: Boolean = false) {
-        targetWasmJs(binaryen)
-    }
-
     /**
      * Configures WASM target
      */
-    fun targetWasmJs(binaryen: Boolean = false) {
-        if (korlibs.korge.gradle.targets.wasm.isWasmEnabled(project)) {
+    fun targetWasmJs() {
             target("wasmJs") {
-                project.configureWasm(projectType, binaryen)
+                project.configureWasm(projectType)
             }
-        }
-    }
-
-    /**
-     * Deprecated. Used to create K/N desktop executables.
-     */
-    @Deprecated("")
-    fun targetDesktop() {
-        //println("targetDesktop is deprecated")
-    }
-
-    /**
-     * Deprecated. Used to create K/N desktop executables for other platforms.
-     */
-    @Deprecated("")
-    fun targetDesktopCross() {
-        //println("targetDesktopCross is deprecated")
     }
 
     /**
@@ -330,7 +307,6 @@ open class KorgeExtension(
      * - KORGE_ENABLE_ANDROID_JS
      */
     fun targetDefault() {
-        if (newDesktopEnabled) targetDesktop()
         if (newAndroidEnabled) targetAndroid()
         //if (newAndroidIndirectEnabled) targetAndroidIndirect()
         //if (newAndroidDirectEnabled) targetAndroidDirect()
@@ -345,7 +321,6 @@ open class KorgeExtension(
         targetJvm()
         targetJs()
         targetWasmJs()
-        targetDesktop()
         targetAndroid()
         targetIos()
     }
