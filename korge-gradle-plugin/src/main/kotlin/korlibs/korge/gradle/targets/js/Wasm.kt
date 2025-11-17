@@ -11,11 +11,11 @@ import org.gradle.api.tasks.TaskAction
 import org.jetbrains.kotlin.gradle.targets.js.npm.*
 import java.io.*
 
-fun Project.configureWasm(projectType: ProjectType, binaryen: Boolean = false) {
+fun Project.configureWasm(projectType: ProjectType) {
     if (gkotlin.targets.findByName("wasm") != null) return
     ensureSourceSetsConfigure("common", "wasmJs")
 
-    configureWasmTarget(executable = true, binaryen = binaryen)
+    configureWasmTarget(executable = true)
 
     if (projectType.isExecutable) {
 

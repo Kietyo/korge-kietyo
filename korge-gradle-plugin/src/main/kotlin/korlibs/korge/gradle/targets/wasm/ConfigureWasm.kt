@@ -8,7 +8,7 @@ import org.gradle.api.*
 //fun isWasmEnabled(project: Project?): Boolean = false
 //fun Project.isWasmEnabled(): Boolean = false
 
-fun Project.configureWasmTarget(executable: Boolean, binaryen: Boolean = false) {
+fun Project.configureWasmTarget(executable: Boolean) {
     kotlin {
         wasmJs {
             if (executable) {
@@ -28,8 +28,6 @@ fun Project.configureWasmTarget(executable: Boolean, binaryen: Boolean = false) 
                 //    }
                 //}
             }
-
-            if (binaryen) applyBinaryen()
         }
 
         sourceSets.maybeCreate("wasmJsTest").apply {

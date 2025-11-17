@@ -486,7 +486,7 @@ object RootKorlibsPlugin {
 
     fun Project.initSamples() {
         rootProject.samples {
-            configureWasm(ProjectType.EXECUTABLE, binaryen = false)
+            configureWasm(ProjectType.EXECUTABLE)
 
             // @TODO: Move to KorGE plugin
             project.configureJvmRunJvm(isRootKorlibs = true)
