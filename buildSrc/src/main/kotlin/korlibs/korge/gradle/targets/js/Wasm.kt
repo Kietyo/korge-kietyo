@@ -8,6 +8,7 @@ import korlibs.korge.gradle.targets.wasm.*
 import korlibs.korge.gradle.util.*
 import org.gradle.api.*
 import org.gradle.api.tasks.TaskAction
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.npm.*
 import java.io.*
 
@@ -36,6 +37,7 @@ fun Project.configureWasm(projectType: ProjectType) {
 }
 
 open class WasmJsCreateIndexTask : DefaultTask() {
+    @OptIn(ExperimentalWasmDsl::class)
     private val npmDir: File = project.kotlin.wasmJs().compilations["main"]!!.npmProject.dir.get().asFile
 
     @TaskAction
